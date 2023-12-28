@@ -1,6 +1,6 @@
 
-# Implementing Toastr Alerts
-If you want to add the beautiful toastr alerts, you can easily add them by following the steps.
+# SweetAlerts (swal) Alerts Implementation
+If you want to add the beautiful sweet alerts, you can easily add them by following the steps.
 There are two ways or methods to implement them.
 
 ## Method 1 (By cdn links) : 
@@ -12,9 +12,9 @@ There are two ways or methods to implement them.
 Step-1 : Paste the js and css links in your layout file.
 
 ```bash
-<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-    
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 ```
 
 
@@ -37,16 +37,14 @@ Step-4 : Write the script for your alert in "alert.blade.php" file
 <div>
     @if(Session::has('alert'))
         <script>
-            toastr.options = 
-            {
-                "closeButton": true,                    
-                "progressBar": true
-            }
-
             var messageType = "{{ session('alert')['type'] ?? 'success' }}";
             var messageText = "{{ session('alert')['message'] }}";
 
-            toastr[messageType](messageText);
+            Swal.fire(
+                messageText,
+                '',
+                messageType
+                )
         </script>
     @endif
 </div>
