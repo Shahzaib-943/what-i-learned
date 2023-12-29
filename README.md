@@ -25,3 +25,7 @@ Additional folders may be added as my interests evolve and my learning journey p
 Feel free to contribute, open issues, or provide feedback. Learning is a collaborative adventure, and your input is valued for enhancing the content's quality and accuracy.
 
 Thank you for joining me on this "What I Learned" journey! 🌟
+
+## Author
+
+- [@Shahzaib](https://github.com/Shahzaib-943)
