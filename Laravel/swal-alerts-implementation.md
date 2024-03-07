@@ -105,8 +105,11 @@ class DeleteConfirmation extends Component
 Step-4 : In your blade make the delete button and call this component, like this
 
 ```
-<a onclick="confirmDelete(event,{{ $quiz->id }})" href="{{ route('quiz.destroy', $quiz->id) }}" class="btn btn-danger">Delete <i class="fa-regular fa-trash-can"></i>
-</a>
+<form id="deleteForm{{ $quiz->id }}" action="{{ route('quiz.destroy', ['quiz' => $quiz->id]) }}" method="POST" style="display: inline;">
+@csrf
+@method('DELETE')
+<button type="submit" class="btn btn-danger" onclick="confirmDelete(event, {{ $quiz->id }})">Delete</button>
+</form>
 
 <x-delete-confirmation :item-id="$quiz->id" />
 ```
@@ -114,9 +117,9 @@ Step-5 : You view of component would look like this
 ```
 <div>
     <script>
-        function confirmDelete(event, itemId) {
+        function confirmDelete(event, quizId) {
             event.preventDefault();
-            var urlToRedirect = event.currentTarget.getAttribute('href');
+
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -127,12 +130,13 @@ Step-5 : You view of component would look like this
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = urlToRedirect;
+                    document.getElementById('deleteForm' + quizId).submit();
                 }
             });
         }
     </script>
 </div>
+
 ```
 
 You Confirmation Delte SWAL is good to go
