@@ -1,0 +1,104 @@
+npm install vue@latest
+
+npm install @vitejs/plugin-vue
+
+if Error
+ npm i @vitejs/plugin-vue@4.0.0
+
+vite.config.js
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import vue from '@vitejs/plugin-vue';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: [
+                'resources/sass/app.scss',
+                'resources/js/app.js',
+                'resources/css/app.css',
+            ],
+            refresh: true,
+        }),
+        vue({
+            template: {
+                transformAssetUrls: {
+                    base: null,
+                    includeAbsolute: false,
+                },
+            },
+        }),
+      
+    ],
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.esm-bundler.js',
+        },
+    },
+});
+
+
+index.blade.php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    @vite('resources/css/app.css')
+    <div id="app">
+        
+    </div>
+    @vite('resources/js/app.js')
+</body>
+</html>
+
+
+app.js
+import { createApp } from 'vue';
+import App from './App.vue'
+import router from'./routes.js'
+
+const app = createApp({});
+
+
+
+createApp(App).use(router).mount("#app")
+
+
+App.vue
+<template>
+    <router-view></router-view>
+  </template>
+  <script>
+  export default {
+ 
+  }
+  </script>
+
+npm i vue-router@next
+routes.js
+import { createWebHistory, createRouter } from 'vue-router'
+import test from './test.vue'
+
+
+const routes = [
+
+    {
+        name: 'test',
+        path: '/',
+        component: test,
+
+    },
+
+];
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+});
+
+export default router;
+
